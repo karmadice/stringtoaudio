@@ -33,9 +33,8 @@ class StringToAudio
         if( !$string ) {
             throw new \Exception("Text string is not provided");
         }
-
-        if (strlen($string) > 100) {
-            throw new \Exception("Text string must not be greater than 100 characters");
+        if (strlen($string) > 150) {
+            throw new \Exception("Text string must not be greater than 150 characters");
         }
         
         $location = $this->_source->getLocation();

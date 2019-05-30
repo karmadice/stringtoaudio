@@ -1,8 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_NOTICE);
 require_once "bootstrap.php";
 
 use StringToAudio\StringToAudio;
 use StringToAudio\AudioProcesser;
+
 
 if( isset($_POST) && !empty( $_POST ) ) {
     $inputString = $_POST['inputstring'];
@@ -17,7 +21,7 @@ if( isset($_POST) && !empty( $_POST ) ) {
     $object->setStorageLocation($outputFileLocation);
     if( strlen($inputString) > 100 ) {
         // Split long string into small chunks
-        $stringChunks = str_split($inputString, 100);
+        $stringChunks = splitText($inputString, 100);
         foreach ( $stringChunks as $chunks ) {
             $object->setFilename($outputFileName . $i);
             $object->getAudio($chunks);
