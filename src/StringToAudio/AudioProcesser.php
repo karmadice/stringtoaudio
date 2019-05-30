@@ -6,7 +6,7 @@
  * Time: 12:50 PM
  */
 
-namespace StringToAudio;
+namespace Karmadice\StringToAudio\StringToAudio;
 
 use getID3;
 

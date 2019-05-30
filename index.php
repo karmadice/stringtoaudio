@@ -4,8 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 require_once "bootstrap.php";
 
-use StringToAudio\StringToAudio;
-use StringToAudio\AudioProcesser;
+use Karmadice\StringToAudio\StringToAudio\StringToAudio;
+use Karmadice\StringToAudio\StringToAudio\AudioProcesser;
+use Karmadice\StringToAudio\StringToAudio\Translate;
 
 
 if( isset($_POST) && !empty( $_POST ) ) {
@@ -13,15 +14,24 @@ if( isset($_POST) && !empty( $_POST ) ) {
     
     // init
     $object = new StringToAudio();
+
     
     $i = 1;
     $files = array();
     $outputFileName = $_POST['outputname'];
     $outputFileLocation = $_POST['outputlocation'];
+    $outputLanguage = $_POST['translatelanguage'];
+    $originalLanguage = $_POST['originallanguage'];
+    $translator = new Translate();
+    $translator->setTarget($outputLanguage);
+    $translator->setSource($originalLanguage);
+    $translatedString = $translator->translate($inputString);
+
     $object->setStorageLocation($outputFileLocation);
-    if( strlen($inputString) > 100 ) {
+    $object->setLanguage($outputLanguage);
+    if( strlen($translatedString) > 100 ) {
         // Split long string into small chunks
-        $stringChunks = splitText($inputString, 100);
+        $stringChunks = splitText($translatedString, 100);
         foreach ( $stringChunks as $chunks ) {
             $object->setFilename($outputFileName . $i);
             $object->getAudio($chunks);
@@ -32,7 +42,7 @@ if( isset($_POST) && !empty( $_POST ) ) {
         $audio = $processor->combileMp3($files, $outputFileName, $outputFileLocation);
     } else {
         $object->setFilename($outputFileName);
-        $object->getAudio($inputString);
+        $object->getAudio($translatedString);
         $audio = $object->getFullLocation();
     }
 }
@@ -69,6 +79,20 @@ if( isset($_POST) && !empty( $_POST ) ) {
                     <div class="form-group">
                         <label for="output-location">Output file location</label>
                         <input type="text" name="outputlocation" id="output-location" class="form-control" required tabindex="3" placeholder="Enter location for the output audio file"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="originallanguage">Original Language</label>
+                        <select name="originallanguage" id="originallanguage" class="form-control">
+                            <option value="en" selected>English</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="translationlanguage">Select Language</label>
+                        <select name="translatelanguage" id="translationlanguage" class="form-control">
+                            <option value="en" selected>English</option>
+                            <option value="hi">Hindi</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

@@ -16,16 +16,12 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3",
-        "james-heinrich/getid3": "^1.9"
+        "james-heinrich/getid3": "^1.9",
+        "phpunit/phpunit": "^8.2@dev"
     },
     "autoload": {
         "psr-4": {
-            "StringToAudio\\": "src/StringToAudio"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "StringToAudio\\": "src/StringToAudio"
+            "Karmadice\\StringToAudio\\": "src/"
         }
     },
     "minimum-stability": "dev"

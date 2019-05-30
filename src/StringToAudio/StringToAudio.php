@@ -1,9 +1,9 @@
 <?php
 
-namespace StringToAudio;
+namespace Karmadice\StringToAudio\StringToAudio;
 
 use GuzzleHttp\Client;
-use StringToAudio\Source;
+use Karmadice\StringToAudio\StringToAudio\Source;
 
 class StringToAudio
 {
@@ -49,7 +49,6 @@ class StringToAudio
         }
         
         $uri = $this->buildUrl($string);
-
         $response = $this->_client->get($uri, array(
             'headers' => array(
                 'Referer' => 'http://translate.google.com/',

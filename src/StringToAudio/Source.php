@@ -6,7 +6,7 @@
  * Time: 12:31 PM
  */
 
-namespace StringToAudio;
+namespace Karmadice\StringToAudio\StringToAudio;
 
 
 class Source
