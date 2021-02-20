@@ -1,0 +1,28 @@
+{
+    "name": "karamdice/stringtoaudio",
+    "type": "library",
+    "description": "A wrapper for Google translator that generates audio from string. It supports any number of characters.",
+    "keywords": ["Speech Library", "Text to Audio", "Google translation"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krutarth Patel",
+            "email": "krutarth.patel7@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "james-heinrich/getid3": "^1.9"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^6.3",
+        "james-heinrich/getid3": "^1.9",
+        "phpunit/phpunit": "^8.2@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Karmadice\\StringToAudio\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
